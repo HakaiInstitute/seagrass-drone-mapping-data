@@ -17,11 +17,11 @@ authors:
   - family-names: "Mai"
     given-names: "Thea"
     affiliation: "Hakai Institute"
-title: "Eelgrass (Zostera marina) extent at sites along the Central Coast, British Columbia"
-version: 1.0.0
+title: "Time series of eelgrass (Zostera marina) meadow extent derived from drone surveys, Central Coast, British Columbia"
+version: "1.1"
 doi: 10.21966/03pw-2190
-date-released: "2026-05-28"
-url: "https://github.com/lreshitnyk/seagrass-drone-mapping-data"
+date-released: "2026-11-18"
+url: "https://github.com/HakaiInstitute/seagrass-drone-mapping-data"
 license: CC-BY-4.0
 keywords:
   - eelgrass

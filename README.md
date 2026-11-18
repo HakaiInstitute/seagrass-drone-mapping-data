@@ -5,11 +5,11 @@
 
 ## Summary
 
-This data package represents a time series of eelgrass (*Zostera marina*) meadow extent derived from remotely piloted aerial system (RPAS or drone) surveys, along with relevant metadata. RPAS surveys are conducted annually at long-term monitoring sites on the Central Coast of British Columbia, Canada. These data are collected as part of the Hakai Institute Habitat Mapping Program, whose broader goal is to document and understand long-term trends in eelgrass meadow dynamics and drivers at local, regional, and coast-wide scales. The Hakai Institute started using drones in 2015 as part of this work in order to capture site-level data on eelgrass distribution for long-term ecological research.
+This data package represents a time series of eelgrass (*Zostera marina*) meadow extent derived from remotely piloted aerial system (RPAS or drone) surveys from 2015 - 2026, along with relevant metadata. RPAS surveys are conducted annually at long-term monitoring sites on the Central Coast of British Columbia, Canada. These data are collected as part of the Hakai Institute Habitat Mapping Program, whose broader goal is to document and understand long-term trends in eelgrass meadow dynamics and drivers at local, regional, and coast-wide scales. The Hakai Institute started using drones in 2015 as part of this work in order to capture site-level data on eelgrass distribution for long-term ecological research.
 
 ## Monitoring Sites
 
-Core monitoring sites are mapped annually or biannually. Additional sites have been mapped opportunistically or as part of shorter-term projects and are included in the dataset.
+Core monitoring sites are mapped annually or biannually. Not every site is surveyed every year (for example, McMullin North was not surveyed in 2026).
 
 | Site Name           | Latitude    | Longitude     | 
 |---------------------|-------------|---------------|
@@ -20,33 +20,33 @@ Core monitoring sites are mapped annually or biannually. Additional sites have b
 | McMullin North      | 52.061502°  | -128.413301°  | 
 | Superstition        | 51.893984°  | -128.234889°  | 
 
-**NOTE** Koeye had incomplete coverage in 2019 and McMulling North had incomplete coverage in 2022 (polygon vector features of coverage in those years is provided).
+**NOTE** Koeye had incomplete coverage in 2019 and McMullin North had incomplete coverage in 2022 (AOI polygons showing the coverage in those years are provided).
 
 ## Data
 
-Data are provided as a compressed geodatabase (`.gdb.zip`) in `data/`. The geodatabase contains:
+Data are provided as a compressed geodatabase (`data/CentralCoast_SeasonalDroneEelgrassPolygons.gdb.zip`). The geodatabase contains:
 
-- **Eelgrass extent polygons** — annual delineations of *Z. marina* meadow extent at each monitoring site (Eelgrass_Drone_extents_AOIClipped)
-- **Area of interest (AOI) polygons** — consistent survey boundaries enabling temporal comparison (Eelgrass_Drone_AOIs)
+- **Eelgrass extent polygons** — delineations of *Z. marina* meadow extent, one feature per survey, clipped to the site AOI (`Eelgrass_Drone_Extents_AOIClipped`)
+- **Area of interest (AOI) polygons** — consistent survey boundaries enabling temporal comparison (`Eelgrass_Drone_AOIs`)
 
-Data dictionaries for each layer are provided as CSV files in `docs/`.
+A data dictionary for each layer is provided as a CSV file in `docs/`.
 
 ## Methods
 
-RPAS surveys are conducted annually during morning low tides (winds < 19 kt, no rain) using a small, commercially available drones. Imagery is collected following automated grid flight plans to ensure complete site coverage with sufficient photo overlap. Drone flights are conducted at heights typically ranging from 95-120 m (above surface level) to ensure proper coverage of terrestrial features to generate accurate orthomosaics. These flight heights also ensure that flights are within the range allowed with a Basic Operations Pilot Certificate. In some cases, flights are conducted at higher altitudes under a Special Flight Operations Certificate. All flights are conducted at tide levels below 1 m (chart datum) in order to improve mapping of the subtidal edge.
+RPAS surveys are conducted annually during morning low tides (winds < 19 kt, no rain) using small, commercially available drones. Imagery is collected following automated grid flight plans to ensure complete site coverage with sufficient photo overlap. Drone flights are conducted at heights typically ranging from 95-120 m (above surface level) to ensure proper coverage of terrestrial features to generate accurate orthomosaics. These flight heights also ensure that flights are within the range allowed with a Basic Operations Pilot Certificate. In some cases, flights are conducted at higher altitudes under a Special Flight Operations Certificate. In general, sites are flown at tide levels of 1 m or lower (chart datum) to improve mapping of the subtidal edge; the tide height for each survey is recorded in the `skp_tide_m` attribute.
 
 
 Orthomosaics are generated using a Structure from Motion Multi-View Stereo (SfM-MVS) workflow (Pix4Dmapper, DroneDeploy, or Agisoft Metashape Pro) and georeferenced using ground control points collected during the survey or co-registered to a reference orthomosaic.
 
-Eelgrass extent is delineated using a combination of object-based image analysis (OBIA) in eCognition Developer 9 and manual delineation in ArcMap (v10.8). Segmentation outputs are imported into ArcGIS, where objects are classified as eelgrass by a trained analyst based on photo-interpretive characteristics. Where segmentation performs poorly, segments are removed and redrawn manually. Where available, towed underwater video data are used to aid image interpretation. A minimum mapping unit (MMU) of 2 m² is applied. 
+Eelgrass extent is delineated using a combination of object-based image analysis (OBIA) in eCognition Developer 9 and manual delineation in ArcMap (v10.8). From 2026, most sites were delineated with the Habitat-Mapper machine learning tool (formerly Kelp-O-Matic) and reviewed by an analyst; the method for each survey is recorded in the `skp_delin_meth` attribute. Segmentation outputs are imported into ArcGIS, where objects are classified as eelgrass by a trained analyst based on photo-interpretive characteristics. Where segmentation performs poorly, segments are removed and redrawn manually. Where available, towed underwater video data are used to aid image interpretation. A minimum mapping unit (MMU) of 2 m² is applied. 
 
-Areal extent data are provided as vector polygon features in NAD83 UTM Zone 9N, clipped to each site area of interest (AOI) to ensure consistent survey boundaries are compared over time, and published to a geodatabase. For further details on factors affecting mapping confidence, see Nahirnick et al. (2018).
+Areal extent data are provided as vector polygon features in NAD83(CSRS) / BC Albers (EPSG:3153), clipped to each site area of interest (AOI) to ensure consistent survey boundaries are compared over time, and published to a geodatabase. The AOI layer is in NAD83(CSRS) / UTM zone 9N. For further details on factors affecting mapping confidence, see Nahirnick et al. (2018).
 
 ## Citation
 
 If you use this dataset, please cite:
 
-> Reshitnyk, L., Guyn, A., Holmes, K., & Mai, T. (2026). Time series of eelgrass (Zostera marina) meadow extent derived from drone surveys, Central Coast, British Columbia. https://doi.org/10.21966/03pw-2190
+> Reshitnyk, L., Guyn, A., Holmes, K., & Mai, T. (2026). Time series of eelgrass (Zostera marina) meadow extent derived from drone surveys, Central Coast, British Columbia (v1.1). Hakai Institute. https://doi.org/10.21966/03pw-2190
 
 A `CITATION.cff` file is included for machine-readable citation.
 
