@@ -2,6 +2,30 @@
 
 All notable changes to this dataset will be documented in this file.
 
+## [1.1] - 2026-11-18
+
+Time series update: adds the 2026 surveys and corrects the documentation and attribute values.
+
+### Added
+
+* 2026 surveys at 5 sites (Choked Pass, Koeye, Pruth Bay, Superstition, Triquet Bay); McMullin North was not surveyed in 2026. Choked Pass was delineated by OBIA, the other four with Habitat-Mapper v0.16.2 (formerly Kelp-O-Matic)
+* Data dictionary for the AOI layer (docs/data_dictionary_GDB_Eelgrass_Drone_AOIs.csv)
+
+### Changed
+
+* Geodatabase renamed from Eelgrass_Drone_DataPackage_20260611.gdb.zip to CentralCoast_SeasonalDroneEelgrassPolygons.gdb.zip; layer names unchanged
+* Site names standardised: Pruth Bay and Triquet Bay (Triquet 2025 was recorded as "Triquet")
+* Sensor names standardised (DJI Phantom Pro 3 -> DJI Phantom 3 Pro, DJI Phantom Pro 4 -> DJI Phantom 4 Pro)
+* Removed leading/trailing whitespace from all text attributes (e.g. "OBIA " -> "OBIA", "High " -> "High")
+* Filled the missing DOI for McMullin North 2022
+* Removed the skp_sharing field (internal sharing category)
+* Corrected tide height for Koeye 2020 (4 -> 0.4 m) and sensor for Pruth Bay 2022 (RPAS-RGB -> DJI Phantom 4 Pro)
+* skp_img_date stored as a date (v1.0 stored a date-time with a midnight time that did not reflect survey time)
+* Geometry repaired with ArcGIS Repair Geometry (1 self-intersection); ArcGIS Check Geometry reports no problems
+* Data dictionary renamed to docs/data_dictionary_GDB_Eelgrass_Drone_Extents_AOIClipped.csv and rewritten so field names match the geodatabase (v1.0 listed field names and fields that were not in the layer); analyst AS (Alex Schmill) added
+* README and data/Readme.md: year range, tide height wording (sites are generally flown at 1 m or lower), v1.1 citation, layer and file names, Habitat-Mapper method, coordinate systems (eelgrass layer is NAD83(CSRS) / BC Albers, EPSG:3153, not UTM zone 9N as stated in v1.0); removed reference to a site location layer that is not in the geodatabase
+* CITATION.cff: version, release date, title and repository URL
+
 ## [1.0] - 2026-05-28
 
 ### Added
